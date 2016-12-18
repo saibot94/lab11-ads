@@ -39,4 +39,35 @@ class ListaSimpluInlantuita:
             print 'lista este goala'
 
     def stergeSpate(self):
-        pass
+        if self.inceput.urm is None:
+            self.inceput = None
+        else:
+            aux = self.inceput
+            while aux.urm.urm is not None:
+                aux = aux.urm
+            aux.urm = None
+
+    def stergereDupaElement(self, x):
+        aux = self.inceput
+        while aux is not None and aux.info != x:
+            aux = aux.urm
+        if aux is not None and aux.urm is not None:
+            aux.urm = aux.urm.urm
+        else:
+            print 'Nu exista un not cu informatia ', x
+
+    def cautareElement(self, x):
+        aux = self.inceput
+        while aux is not None and aux.info != x:
+            aux = aux.urm
+        return aux is not None
+
+    def cautareDupaIndex(self,k):
+        aux = self.inceput
+        i = 1
+        while aux is not None and i < k:
+            aux = aux.urm
+            i += 1
+        return aux
+
+
