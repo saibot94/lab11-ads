@@ -34,4 +34,52 @@ class TestListaDubla(unittest.TestCase):
         self.lista.stergeSpate()
 
         self.assertEquals('b', self.lista.inceput.info)
-        self.assertEquals(None, self.lista.inceput.urm)
+        self.assertEquals(self.lista.sfarsit.info, self.lista.inceput.info)
+
+    def test_stergere_ref_mijloc(self):
+        self.lista.adaugareSpate('a')
+        self.lista.adaugareSpate('b')
+        self.lista.adaugareSpate('c')
+
+        elem = self.lista.inceput.urm
+        self.lista.stergereElement(elem)
+        self.assertEqual(self.lista.inceput.info, 'a')
+        self.assertEqual(self.lista.sfarsit.info, 'c')
+
+    def test_stergere_ref_fata(self):
+        self.lista.adaugareSpate('a')
+        self.lista.adaugareSpate('b')
+        self.lista.adaugareSpate('c')
+
+        elem = self.lista.inceput
+        self.lista.stergereElement(elem)
+        self.assertEqual(self.lista.inceput.info, 'b')
+        self.assertEqual(self.lista.sfarsit.info, 'c')
+
+    def test_stergere_ref_spate(self):
+        self.lista.adaugareSpate('a')
+        self.lista.adaugareSpate('b')
+        self.lista.adaugareSpate('c')
+
+        elem = self.lista.sfarsit
+        self.lista.stergereElement(elem)
+        self.assertEqual(self.lista.inceput.info, 'a')
+        self.assertEqual(self.lista.sfarsit.info, 'b')
+
+    def test_inserare_inainte(self):
+        self.lista.adaugareSpate('a')
+        self.lista.adaugareSpate('b')
+        self.lista.adaugareSpate('c')
+
+        elem = self.lista.sfarsit.prec
+        self.lista.inserareInainte(elem, 'd')
+        self.assertEqual(self.lista.inceput.urm.info, 'd')
+
+    def test_inserare_dupa(self):
+        self.lista.adaugareSpate('a')
+        self.lista.adaugareSpate('b')
+        self.lista.adaugareSpate('c')
+
+        elem = self.lista.sfarsit.prec
+        self.lista.inserareDupa(elem, 'd')
+        self.assertEqual(self.lista.inceput.urm.urm.info, 'd')
